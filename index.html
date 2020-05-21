@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Portail d'actualités léger">
+    <meta name="author" content="Zied ZAIEM">
+    <title>News</title>
+    <link rel="shortcut icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAACb0lEQVRYhe2XsUtqURzHP1dvmFtTEQ0NEgrSKrVF/gGVQuGQEoGEDg5xWxqanC4OLeXiUkPXyc3FMcEhSKS403XoGkUNiYtGcvUNjyLf9VlZ6IPndzzf7/ndzzlwfudcodVqtRmiLMP8+AhgBDAC6AqgqirhcJhwOIyqqj0nv2Z3dnZ+DqBer1MulymXy8iyTLPZ/Ovk99kfA3gvXdc5PT3tu/i3AQAURUHTtOEAzM/PYxgGsixjGMbgAXZ3d7HZbGiaRjqdHjzAzMwMW1tbAJycnKDr+mABAPx+Py6Xi2aziSzLtNs/e3t/CGCxWNjb20MURVRVJZPJfKrw3d0d8XicQCBAKBTi+PiYRqPxdQCA2dlZNjc3AUilUtzf3/fM397eEolEuLm5YWNjA6/XSzabZX9/37SDn27FgUAAh8PB8/MziUSiZ/bo6Ijx8XEODw9ZXV0lGAwiSRKlUonLy8v+AKxWK5IkYbVaKRaLZLPZrrlGo8HFxQVerxe73f42vri4iCAIXF1ddeTFzwIAzM3Nsb6+ztnZGclkkkgkYso8Pj7SarVQFAVFUUx+rVbrHwAgFAqRz+epVCqkUimTLwgCACsrKywsLJj8ycnJ7wGMjY0hSRKxWIynpyeTPzU1hSiKvLy84PF4PqzX13vA7XaztrbW1bPZbCwvL5PL5SgWi2/j1WqVg4MDUzP78g68ant7m0Kh0PVIRqNRdF1HkiTcbjd2u53r62ump6eZmJjoyAp//pg8PDyQz+eB312wlzRNo1QqIQgCPp+vwzMMg/Pzc1RVpd1u43Q6WVpaQhQ712wCGLT+vTfhCOC/A/gFtU31hlxA5NwAAAAASUVORK5CYII=">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+
+    <style>
+        table {
+            table-layout: fixed;
+            width: auto;
+            min-width: 100%;
+        }
+
+        table td.editor {
+            word-wrap: break-word;
+            overflow: hidden;
+            white-space: nowrap;
+            width: 100px;
+            text-overflow: ellipsis;
+        }
+
+        table td.title {
+            word-wrap: break-word;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        table td.sa {
+            text-align: right;
+        }
+
+        table td.sa span {
+            display: none;
+        }
+
+        table td.date {
+            overflow: visible;
+            text-align: right;
+            width: 150px;
+        }
+
+        tr:hover {
+            cursor: pointer;
+        }
+
+        .modal-body img {
+            max-width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary flex-column flex-md-row bd-navbar">
+            <div class="container">
+                <a class="navbar-brand" href="javascript:;">
+                    News
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-primary"
+                    aria-controls="navbar-primary" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbar-primary">
+
+                    <div class="navbar-collapse-header">
+                        <div class="row">
+                            <div class="col-6 collapse-brand">
+                                <a href="/">News</a>
+                            </div>
+                            <div class="col-6 collapse-close">
+                                <button type="button" class="navbar-toggler" data-toggle="collapse"
+                                    data-target="#navbar-primary" aria-controls="navbar-primary" aria-expanded="false"
+                                    aria-label="Toggle navigation">
+                                    <span></span>
+                                    <span></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+                        <li class="nav-item d-lg-none" v-for="(item, itemindex) in titles">
+                            <a class="nav-link" v-bind:class="{ active: index==itemindex }" href="javascript:void()"
+                                v-on:click="index=itemindex">{{ item }}</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ml-lg-auto">
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <br />
+
+
+        <div class="container-fluid d-none d-lg-block">
+            <center>
+                <ul class="nav nav-pills">
+                    <li class="nav-item" v-for="(item, itemindex) in titles">
+                        <a class="nav-link" v-bind:class="{ active: index==itemindex }" href="javascript:void()"
+                            v-on:click="index=itemindex">{{ item }}</a>
+                    </li>
+                </ul>
+            </center>
+            <br />
+            <table class="table table-sm table-hover" width="100%" cellspacing="0" cellpadding="0">
+                <tbody>
+                    <tr v-for="item in news[index]" v-on:click="openModal(item)">
+                        <td class="title" v-bind:class="{ sa: index==4 }"><b>{{ item.title }}</b> <span
+                                class="text-muted">{{ item.description }}</span></td>
+                        <td class="date text-muted">{{ moment(item) }}</td>
+                    </tr>
+                    <tr>
+                </tbody>
+            </table>
+        </div>
+
+        <main class="container d-lg-none">
+            <center>
+                <h2>
+                    <button style="margin-right: 20px;" v-on:click="indexplus">⬅️</button>
+                    {{ titles[index] }}
+                    <button style="margin-left: 20px;" v-on:click="indexminus">➡️</button>
+                </h2>
+            </center>
+            <ol>
+                <li v-for="item in news[index]">
+                    <a v-bind:href="item.url" target="_blank" rel="noreferrer noopener">{{ item.title }}</a>
+                </li>
+            </ol>
+
+        </main>
+
+        <div class="modal fade" tabindex="-1" role="dialog" id="newsModal">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{ article.title }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>{{ article.description }}</p>
+                        <img v-bind:src="article.urlToImage" v-if="article.urlToImage != null" alt="article.title" />
+                        <p>{{ article.content }}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a v-bind:href="article.url" target="_blank" rel="noreferrer noopener" type="button"
+                            class="btn btn-primary">Voir sur {{ article.source.name }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <br />
+    <footer class="container">
+        <hr>
+        <div class="row align-items-center justify-content-md-between">
+            <div class="col-md-6">
+                <div class="copyright">
+                    © 2020 <a href="https://www.ziedzaiem.com" target="_blank" rel="noopener noreferrer">Zied ZAIEM</a>
+                    |
+                    <a href="https://twitter.com/ziedzaiem" target="_blank" rel="noopener noreferrer">@ziedzaiem</a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <ul class="nav nav-footer justify-content-end">
+                    <li class="nav-item">
+                        <a href="https://github.com/ziedzaiem/News" target="_blank" rel="noopener noreferrer"
+                            class="nav-link">Code source sur Github</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="https://newsapi.org/" target="_blank" rel="noopener noreferrer"
+                            class="nav-link">Données : newsapi.org</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link">v0.0.1</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <br />
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+
+    <!-- production version, optimized for size and speed -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment-with-locales.min.js"
+        integrity="sha256-4HOrwHz9ACPZBxAav7mYYlbeMiAL0h6+lZ36cLNpR+E=" crossorigin="anonymous"></script>
+
+    <script src="index.js"></script>
+
+</body>
+
+</html>
